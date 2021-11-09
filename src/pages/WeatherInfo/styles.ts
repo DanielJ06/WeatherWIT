@@ -20,7 +20,7 @@ export const TempContainer = styled.View`
 
 	border-radius: 15px;
 
-	background-color: #5D71F6;
+	background-color: ${props => props.theme.colors.lightBlue};
 `;
 
 export const InfoContainer = styled.View`
@@ -34,7 +34,7 @@ export const InfoContainer = styled.View`
 	padding: 25px;
 	margin-top: 20px;
 
-	background-color: #FFF;
+	background-color: ${props => props.theme.colors.white};
 	border-radius: 15px;
 `;
 
@@ -43,14 +43,19 @@ export const InfoAligner = styled.View`
 	align-items: center;
 `;
 
+export const InfoValue = styled.Text`
+	margin-top: 10px;
+	color: ${props => props.theme.colors.black};
+`;
+
 export const ConditionContainer = styled.View`
 	align-items: center;
 `;
 
 export const ConditionText = styled.Text`
-	color: #FFF;
+	color: ${props => props.theme.colors.white};
 	font-weight: bold;
-	font-size: 25px;
+	font-size: ${props => props.theme.textSizes.medium}px;
 `;
 
 export const ConditionIcon = styled.Image`
@@ -63,23 +68,22 @@ export const NumberContainer = styled.View`
 `;
 
 export const CelsiusText = styled.Text`
-	color: #FFF;
+	color: ${props => props.theme.colors.white};
 	font-weight: bold;
-	font-size: 48px;
+	font-size: ${props => props.theme.textSizes.xlarge}px;
 `;
 
 export const SectionTitle = styled.Text`
-	font-size: 28px;
+	font-size: ${props => props.theme.textSizes.bigger}px;
 	font-weight: 300;
-	margin-top: 20px;
 
-	align-self: flex-start;
+	margin-top: 20px;
 	margin-left: 20px;
+	align-self: flex-start;
 `;
 
 export const LoadingContainer = styled.View`
 	flex: 1;
-
 	justify-content: center;
 	align-items: center;
 `;

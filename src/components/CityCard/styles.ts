@@ -15,14 +15,14 @@ export const CityContainer = styled.TouchableOpacity`
 `;
 
 export const CityName = styled.Text`
-	font-size: 38px;
+	font-size: ${props => props.theme.textSizes.large}px;
 	font-weight: bold;
-	color: #FFF;
+	color: ${props => props.theme.colors.white};
 `;
 
 export const CityCountry = styled.Text`
-	font-size: 18px;
-	color: #FFF;
+	font-size: ${props => props.theme.textSizes.regular}px;
+	color: ${props => props.theme.colors.white};
 	margin-bottom: 21px;
 `;
 

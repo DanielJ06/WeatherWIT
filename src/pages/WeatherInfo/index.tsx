@@ -15,6 +15,7 @@ import { ForecastProps } from "../../utils/types/forecastResponse";
 
 import * as S from "./styles";
 import ForecastCard from "../../components/ForecastCard";
+import { useTheme } from "styled-components";
 
 const { width } = Dimensions.get("window");
 
@@ -27,6 +28,8 @@ type WeatherProps = {
 const WeatherInfo: React.FC = () => {
 	const routes = useRoute<RouteProp<WeatherProps, "WeatherInfo">>();
 	const navigation = useNavigation<NativeStackNavigationProp<any, any>>();
+	const theme = useTheme();
+
 	const [info, setInfo] = useState<CityInfoProps>();
 	const [forecastData, setForecastData] = useState<ForecastProps[]>();
 
@@ -60,36 +63,37 @@ const WeatherInfo: React.FC = () => {
 									uri: `https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`,
 								}}
 							/>
-							<S.ConditionText style={{ color: "#FFF", fontWeight: "bold" }}>
+							<S.ConditionText>
 								{info.weather[0].main}
 							</S.ConditionText>
-							<Text style={{ color: "#FFF" }}>
+							<Text style={{ color: theme.colors.white }}>
 								{info.weather[0].description}
 							</Text>
 						</S.ConditionContainer>
 
 						<S.NumberContainer>
 							<S.CelsiusText>{info.main.temp.toFixed(1)}°</S.CelsiusText>
-							<Text style={{ color: "#FFF" }}>
+							<Text style={{ color: theme.colors.white }}>
 								Feels like {info.main.feels_like.toFixed(1)}°
 							</Text>
 						</S.NumberContainer>
 					</S.TempContainer>
+
 					<S.InfoContainer>
 						<S.InfoAligner>
 							<Feather name="wind" size={21} />
-							<Text style={{ marginTop: 10 }}>{info.wind.speed}</Text>
-							<Text style={{ marginTop: 10, fontSize: 10 }}>SPEED</Text>
+							<S.InfoValue>{info.wind.speed}</S.InfoValue>
+							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>SPEED</S.InfoValue>
 						</S.InfoAligner>
 						<S.InfoAligner>
 							<Feather name="droplet" size={21} />
-							<Text style={{ marginTop: 10 }}>{info.main.humidity}%</Text>
-							<Text style={{ marginTop: 10, fontSize: 10 }}>HUMIDITY</Text>
+							<S.InfoValue>{info.main.humidity}%</S.InfoValue>
+							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>HUMIDITY</S.InfoValue>
 						</S.InfoAligner>
 						<S.InfoAligner>
 							<Ionicons name="timer-outline" size={21} />
-							<Text style={{ marginTop: 10 }}>{info.main.pressure}</Text>
-							<Text style={{ marginTop: 10, fontSize: 10 }}>PRESSURE</Text>
+							<S.InfoValue>{info.main.pressure}</S.InfoValue>
+							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>PRESSURE</S.InfoValue>
 						</S.InfoAligner>
 					</S.InfoContainer>
 

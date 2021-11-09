@@ -1,8 +1,6 @@
 import { Dimensions } from 'react-native';
 import styled from 'styled-components/native';
 
-const { height } = Dimensions.get('window');
-
 export const Container = styled.View`
 	align-items: center;
 
@@ -14,13 +12,13 @@ export const Container = styled.View`
 	margin-left: 5px;
 	margin-right: 5px;
 
-	background-color: #5D71F6;
+	background-color: ${props => props.theme.colors.lightBlue};
 	border-radius: 15px;
 `;
 
 export const WhiteText = styled.Text`
-	color: #FFF;
-	font-size: 20px;
+	color: ${props => props.theme.colors.white};
+	font-size: ${props => props.theme.textSizes.big}px;
 `;
 
 export const WIcon = styled.Image`

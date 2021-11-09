@@ -32,28 +32,34 @@ const WeatherInfo: React.FC = () => {
 
 	const [info, setInfo] = useState<CityInfoProps>();
 	const [forecastData, setForecastData] = useState<ForecastProps[]>();
-
-	useEffect(() => {
-		navigation.setOptions({ title: routes.params.cityName });
-	}, []);
+	const [loading, setLoading] = useState(true);
+	const [showError, setShowError] = useState(false);
 
 	useEffect(() => {
 		async function loadCityInfo() {
-			const { data } = await API.get(
-				`&q=${routes.params.cityName}&units=metric`
-			);
-			const forecast = await FORECAST_API.get(
-				`&q=${routes.params.cityName}&units=metric`
-			);
-			setForecastData(forecast.data.list);
-			setInfo(data);
+			try {
+				setLoading(true)
+				const { data } = await API.get(
+					`&q=${routes.params.cityName}&units=metric`
+				);
+				const forecast = await FORECAST_API.get(
+					`&q=${routes.params.cityName}&units=metric`
+				);
+				setForecastData(forecast.data.list);
+				setInfo(data);
+				navigation.setOptions({ title: `${data.name} - ${data.sys.country}` });
+				setLoading(false)
+			} catch(err) {
+				setLoading(false)
+				setShowError(true)
+			}
 		}
 		loadCityInfo();
 	}, []);
 
 	return (
 		<>
-			{info && forecastData ? (
+			{!loading && info && forecastData && (
 				<S.Container>
 					<S.SectionTitle>Current Weather</S.SectionTitle>
 					<S.TempContainer>
@@ -111,13 +117,25 @@ const WeatherInfo: React.FC = () => {
 						renderItem={({ item }) => <ForecastCard itemData={item} />}
 					/>
 				</S.Container>
-			) : (
+			)}  
+			{loading && (
 				<S.LoadingContainer>
 					<LottieView 
 						autoPlay
 						loop
 						source={require('../../utils/lotties/weather_loading.json')}
 					/>
+				</S.LoadingContainer>
+			)}
+			{!loading && showError && (
+				<S.LoadingContainer>
+					<LottieView
+						style={{ width: width * 0.8 }} 
+						autoPlay
+						loop
+						source={require('../../utils/lotties/magnifier.json')}
+					/>
+					<S.SectionTitle style={{ alignSelf: 'center' }} >We didn't find this city</S.SectionTitle>
 				</S.LoadingContainer>
 			)}
 		</>

@@ -1,7 +1,7 @@
 import { useNavigation } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
-import React, { useEffect, useState } from 'react';
-import { Dimensions, FlatList, Image, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import { FlatList, View } from 'react-native';
 
 import CityCard from '../../components/CityCard';
 import Input from '../../components/Input';

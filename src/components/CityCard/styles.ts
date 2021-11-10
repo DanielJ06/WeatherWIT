@@ -6,7 +6,7 @@ const { height, width } = Dimensions.get('window');
 
 export const CityContainer = styled.TouchableOpacity`
 	width: ${width * 0.9}px;
-	height: ${height * 0.6}px;
+	height: ${height * 0.3}px;
 	margin-top: 12px;
 	margin-bottom: 12px;
 	border-radius: 15px;

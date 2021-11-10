@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Dimensions, FlatList, Text, View } from "react-native";
+import { Dimensions, FlatList, Text } from "react-native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import LottieView from "lottie-react-native";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/core";
 import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useTheme } from "styled-components";
 
 // Services
 import API from "../../service/infoApi";
@@ -15,7 +16,6 @@ import { ForecastProps } from "../../utils/types/forecastResponse";
 
 import * as S from "./styles";
 import ForecastCard from "../../components/ForecastCard";
-import { useTheme } from "styled-components";
 
 const { width } = Dimensions.get("window");
 
@@ -38,7 +38,7 @@ const WeatherInfo: React.FC = () => {
 	useEffect(() => {
 		async function loadCityInfo() {
 			try {
-				setLoading(true)
+				setLoading(true);
 				const { data } = await API.get(
 					`&q=${routes.params.cityName}&units=metric`
 				);
@@ -48,10 +48,10 @@ const WeatherInfo: React.FC = () => {
 				setForecastData(forecast.data.list);
 				setInfo(data);
 				navigation.setOptions({ title: `${data.name} - ${data.sys.country}` });
-				setLoading(false)
-			} catch(err) {
-				setLoading(false)
-				setShowError(true)
+				setLoading(false);
+			} catch (err) {
+				setLoading(false);
+				setShowError(true);
 			}
 		}
 		loadCityInfo();
@@ -69,9 +69,7 @@ const WeatherInfo: React.FC = () => {
 									uri: `https://openweathermap.org/img/wn/${info.weather[0].icon}@2x.png`,
 								}}
 							/>
-							<S.ConditionText>
-								{info.weather[0].main}
-							</S.ConditionText>
+							<S.ConditionText>{info.weather[0].main}</S.ConditionText>
 							<Text style={{ color: theme.colors.white }}>
 								{info.weather[0].description}
 							</Text>
@@ -89,17 +87,23 @@ const WeatherInfo: React.FC = () => {
 						<S.InfoAligner>
 							<Feather name="wind" size={21} />
 							<S.InfoValue>{info.wind.speed}</S.InfoValue>
-							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>SPEED</S.InfoValue>
+							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>
+								SPEED
+							</S.InfoValue>
 						</S.InfoAligner>
 						<S.InfoAligner>
 							<Feather name="droplet" size={21} />
 							<S.InfoValue>{info.main.humidity}%</S.InfoValue>
-							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>HUMIDITY</S.InfoValue>
+							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>
+								HUMIDITY
+							</S.InfoValue>
 						</S.InfoAligner>
 						<S.InfoAligner>
 							<Ionicons name="timer-outline" size={21} />
 							<S.InfoValue>{info.main.pressure}</S.InfoValue>
-							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>PRESSURE</S.InfoValue>
+							<S.InfoValue style={{ fontSize: theme.textSizes.xsmall }}>
+								PRESSURE
+							</S.InfoValue>
 						</S.InfoAligner>
 					</S.InfoContainer>
 
@@ -117,25 +121,27 @@ const WeatherInfo: React.FC = () => {
 						renderItem={({ item }) => <ForecastCard itemData={item} />}
 					/>
 				</S.Container>
-			)}  
+			)}
 			{loading && (
 				<S.LoadingContainer>
-					<LottieView 
+					<LottieView
 						autoPlay
 						loop
-						source={require('../../utils/lotties/weather_loading.json')}
+						source={require("../../utils/lotties/weather_loading.json")}
 					/>
 				</S.LoadingContainer>
 			)}
 			{!loading && showError && (
 				<S.LoadingContainer>
 					<LottieView
-						style={{ width: width * 0.8 }} 
+						style={{ width: width * 0.8 }}
 						autoPlay
 						loop
-						source={require('../../utils/lotties/magnifier.json')}
+						source={require("../../utils/lotties/magnifier.json")}
 					/>
-					<S.SectionTitle style={{ alignSelf: 'center' }} >We didn't find this city</S.SectionTitle>
+					<S.SectionTitle style={{ alignSelf: "center" }}>
+						We didn't find this city
+					</S.SectionTitle>
 				</S.LoadingContainer>
 			)}
 		</>

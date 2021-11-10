@@ -1,9 +1,9 @@
-import React from 'react';
-import { Feather } from '@expo/vector-icons'
-import { TextInputProps, View } from 'react-native';
+import React from "react";
+import { Feather } from "@expo/vector-icons";
+import { TextInputProps, View } from "react-native";
 
-import * as S from './styles';
-import { useTheme } from 'styled-components';
+import * as S from "./styles";
+import { useTheme } from "styled-components";
 
 interface CityInputProps extends TextInputProps {
 	btnAction: Function;
@@ -11,11 +11,10 @@ interface CityInputProps extends TextInputProps {
 }
 
 const Input: React.FC<CityInputProps> = ({ btnAction, disabled, ...rest }) => {
-
 	const theme = useTheme();
 
 	return (
-		<View style={{ flexDirection: 'row' }} >
+		<View style={{ flexDirection: "row" }}>
 			<S.InputContainer>
 				<Feather size={18} name="search" />
 				<S.InputField {...rest} />
@@ -25,6 +24,6 @@ const Input: React.FC<CityInputProps> = ({ btnAction, disabled, ...rest }) => {
 			</S.GoBtn>
 		</View>
 	);
-}
+};
 
 export default Input;

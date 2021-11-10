@@ -2,10 +2,12 @@ import { useNavigation } from '@react-navigation/core';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import React, { useEffect, useState } from 'react';
 import { Dimensions, FlatList, Image, Text, View } from 'react-native';
+
 import CityCard from '../../components/CityCard';
 import Input from '../../components/Input';
-
 import { Cities } from '../../utils/citiesList';
+
+import * as S from './styles';
 
 const Main: React.FC = () => {
 
@@ -13,18 +15,18 @@ const Main: React.FC = () => {
 	const [cityName, setCityName] = useState("");
 
 	return (
-		<View style={{ flex: 1, alignItems: 'center', backgroundColor: '#FFF' }} >
+		<S.Container>
 			<FlatList
 				ListHeaderComponent={
-					<>
-						<Text>Hello, user!</Text>
-						<Input 
+					<View style={{ marginBottom: 32 }}>
+						<S.SearchTitle>Search a {'\n'}specific place:</S.SearchTitle>
+						<Input
 							btnAction={() => navigation.navigate('WeatherInfo', { cityName: cityName.trim().replace(/ /g, '%20') })}
 							disabled={!cityName}
 							value={cityName}
 							onChangeText={setCityName}
 						/>
-					</>
+					</View>
 				}
 				style={{ marginTop: 12, marginBottom: 12 }}
 				data={Cities}
@@ -33,13 +35,11 @@ const Main: React.FC = () => {
 				renderItem={({ item }) => (
 					<CityCard 
 						key={item.id} 
-						coverUrl={item.cover} 
-						cityName={item.name}
-						country={item.country}
+						cityData={item}
 					/>
 				)}
 			/>
-		</View>
+		</S.Container>
 	);
 }
 

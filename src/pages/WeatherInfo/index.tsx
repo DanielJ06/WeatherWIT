@@ -43,7 +43,7 @@ const WeatherInfo: React.FC = () => {
 					`&q=${routes.params.cityName}&units=metric`
 				);
 				const forecast = await FORECAST_API.get(
-					`&q=${routes.params.cityName}&units=metric`
+					`&q=${routes.params.cityName}&units=metric&cnt=20`
 				);
 				setForecastData(forecast.data.list);
 				setInfo(data);

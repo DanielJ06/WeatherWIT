@@ -6,6 +6,11 @@
 
 <hr />
 
+# :eye: Preview
+
+<img height="250" src=".github/assets/home.PNG" />
+<img height="250" src=".github/assets/info.PNG" />
+
 # :pushpin: Table of Contents
 
 * [Features](#brain-features)

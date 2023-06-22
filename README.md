@@ -1,5 +1,5 @@
 # WeatherWIT
- Weather App Challenge made during WIT's selection process for react native developer
+ Weather App Challenge
 
 [![Author](https://img.shields.io/badge/author-DanielJ06-7FCD91?style=flat-square)](https://github.com/danielj06)
 [![Languages](https://img.shields.io/github/languages/count/DanielJ06/WeatherWIT?color=%7FCD91&style=flat-square)](#)
